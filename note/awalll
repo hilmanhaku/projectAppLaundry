@@ -1,0 +1,32 @@
+Imports MySql.Data.MySqlClient
+Imports ZstdSharp.Unsafe
+Public Class FormUser
+    Private selectedId As Integer
+    Sub ResetForm()
+
+        txtNamaUser.Clear()
+        txtUsername.Clear()
+        txtPassword.Clear()
+        cmbLevelUser.SelectedIndex = -1
+
+        txtNamaUser.Focus()
+
+    End Sub
+    Sub TampilData()
+
+        Call Konek()
+
+        da = New MySqlDataAdapter(
+        "SELECT * FROM users",
+        Koneksi
+    )
+
+        dt = New DataTable
+
+        da.Fill(dt)
+
+        dgvUser.DataSource = dt
+
+        Call Diskonek()
+
+    End Sub
