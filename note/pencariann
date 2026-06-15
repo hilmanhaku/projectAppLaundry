@@ -1,0 +1,21 @@
+Private Sub txtCariPelanggan_Click(sender As Object, e As EventArgs) Handles txtCariUser.Click
+
+    Call Konek()
+
+    da = New MySqlDataAdapter(
+    "SELECT * FROM users
+     WHERE nama_user
+     LIKE '%" &
+     txtCariUser.Text &
+     "%'",
+    Koneksi
+)
+
+    dt = New DataTable
+
+    da.Fill(dt)
+
+    dgvUser.DataSource = dt
+
+    Call Diskonek()
+End Sub
