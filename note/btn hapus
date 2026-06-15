@@ -1,0 +1,51 @@
+Private Sub btnHapus_Click(sender As Object, e As EventArgs) Handles btnHapus.Click
+    Try
+
+        Dim jawab As DialogResult
+
+        jawab = MessageBox.Show(
+            "Yakin ingin menghapus data?",
+            "Konfirmasi",
+            MessageBoxButtons.YesNo,
+            MessageBoxIcon.Question
+        )
+        If jawab = DialogResult.Yes Then
+
+            Call Konek()
+
+            ' Use the previously stored selectedId from dgvUser_CellClick
+            Dim id As Integer = selectedId
+            Dim query As String =
+            "DELETE FROM users
+             WHERE id_user=@id"
+
+            cmd = New MySqlCommand(
+                query,
+                Koneksi
+            )
+
+            cmd.Parameters.AddWithValue(
+                "@id",
+                id
+            )
+
+            cmd.ExecuteNonQuery()
+
+            MsgBox(
+                "Data Berhasil Dihapus"
+            )
+
+            TampilData()
+
+            ResetForm()
+
+            Call Diskonek()
+
+        End If
+
+    Catch ex As Exception
+
+        MsgBox(ex.Message)
+
+    End Try
+End Sub
