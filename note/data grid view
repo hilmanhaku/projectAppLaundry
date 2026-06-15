@@ -1,0 +1,24 @@
+Private Sub dgvUser_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles dgvUser.CellClick
+    Dim baris As Integer =
+    dgvUser.CurrentRow.Index
+
+    ' Store the id of the selected row for use in update/delete operations
+    selectedId = CInt(dgvUser.Rows(baris).Cells(0).Value)
+
+    txtNamaUser.Text =
+    dgvUser.Rows(baris).
+    Cells(1).Value
+
+    txtUsername.Text =
+    dgvUser.Rows(baris).
+    Cells(2).Value
+
+    txtPassword.Text =
+    dgvUser.Rows(baris).
+    Cells(3).Value
+
+    cmbLevelUser.SelectedItem =
+        dgvUser.Rows(baris).
+                    Cells(4).Value
+
+End Sub
