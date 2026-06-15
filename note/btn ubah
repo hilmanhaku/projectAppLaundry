@@ -1,0 +1,62 @@
+ Private Sub btnUbah_Click(sender As Object, e As EventArgs) Handles btnUbah.Click
+     Try
+
+         Call Konek()
+         ' Use the selectedId set in dgvUser_CellClick for the WHERE clause
+         Dim query As String =
+             "update users set
+             nama_user = @nama,
+             username = @username,
+             password = @password,
+             level_user = @level
+         WHERE id_user = @id"
+
+
+
+         cmd = New MySqlCommand(
+             query,
+             Koneksi
+         )
+
+         cmd.Parameters.AddWithValue(
+             "@nama",
+             txtNamaUser.Text
+         )
+
+         cmd.Parameters.AddWithValue(
+             "@username",
+             txtUsername.Text
+         )
+
+         cmd.Parameters.AddWithValue(
+             "@password",
+             txtPassword.Text
+         )
+         cmd.Parameters.AddWithValue(
+             "@level",
+             cmbLevelUser.SelectedItem.ToString()
+         )
+         cmd.Parameters.AddWithValue(
+             "@id",
+             selectedId
+         )
+
+
+         cmd.ExecuteNonQuery()
+
+         MsgBox(
+             "Data Berhasil Disimpan"
+         )
+
+         TampilData()
+
+         ResetForm()
+
+         Call Diskonek()
+
+     Catch ex As Exception
+
+         MsgBox(ex.Message)
+
+     End Try
+ End Sub
